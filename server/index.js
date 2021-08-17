@@ -31,7 +31,7 @@ app.get('/friends', (req, res) => {
         console.log(error);
         rollbar.error(error);
     }
-})
+});
 
 app.get('/api/friends', controller.getFriends)
 app.delete('/api/friends/:id', controller.removeFriend)

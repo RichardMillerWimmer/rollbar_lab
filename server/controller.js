@@ -1,3 +1,5 @@
+
+
 let friends = ['Matt', 'Brady', 'Eric', 'Stuart'];
 
 module.exports = {
@@ -8,10 +10,13 @@ module.exports = {
     removeFriend: (req, res) => {
         const { id } = req.params
         // console.log(id)
-
-        friends = friends.filter(element => {
-            return element !== id
-        })
+        if(!id) {
+            rollbar.error('No id for app.delete')
+        } else if (id) {
+            friends = friends.filter(element => {
+                return element !== id
+            })
+        }
 
         res.status(200).send(friends);
     }
