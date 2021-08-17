@@ -6,6 +6,12 @@ module.exports = {
         res.status(200).send(friends);
     },
     removeFriend: (req, res) => {
+        const { id } = req.params
+        // console.log(id)
+
+        friends = friends.filter(element => {
+            return element !== id
+        })
 
         res.status(200).send(friends);
     }

@@ -3,7 +3,7 @@ const friendsBtn = document.getElementById('friendsBtn');
 const friendsContainer = document.getElementById('friendsContainer');
 
 function getFriends() {
-    console.log('getFriend Main.js')
+    // console.log('getFriend Main.js')
     friendsContainer.innerHTML = '';
     axios.get('/api/friends')
     .then(res => {
