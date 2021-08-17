@@ -8,16 +8,18 @@ const rollbar = new Rollbar({
     captureUnhandledRejections: true
   });
 
-const controller = require('./controller');
+// const controller = require('./controller');
 
 const app = express();
+
+const port = process.env.PORT || 4141;
 
 // rollbar.log("Hello world!");
 
 app.use(express.json());
+
 app.use('/static', express.static(path.join(__dirname, '../client')));
 
-const port = process.env.PORT || 4141;
 
 app.get('/', (req, res) => {
     rollbar.log('App.get homepage hit')
@@ -27,14 +29,33 @@ app.get('/', (req, res) => {
 app.get('/friends', (req, res) => {
     try {
         friends();
-    } catch (error) {
-        console.log(error);
-        rollbar.error(error);
+    } catch (err) {
+        console.log(err);
+        rollbar.error(err)
     }
 });
 
-app.get('/api/friends', controller.getFriends)
-app.delete('/api/friends/:id', controller.removeFriend)
+let friends = ['Matt', 'Brady', 'Eric', 'Stuart'];
+
+app.get('/api/friends', (req, res) => {
+    // console.log('getFriend Controller')
+    res.status(200).send(friends);
+});
+
+app.delete('/api/friends/:id', (req, res) => {
+    const { id } =req.params;
+    // id = ''
+
+    if(!id) {
+        rollbar.error("No id for app.delete")
+    } else if (id) {
+        friends = friends.filter(element => {
+            return element !== id
+        })
+    }
+    res.status(200).send(friends);
+});
+
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)

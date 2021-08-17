@@ -8,8 +8,10 @@ module.exports = {
         res.status(200).send(friends);
     },
     removeFriend: (req, res) => {
-        const { id } = req.params
+        let { id } = req.params
+        let id = ''
         // console.log(id)
+
         if(!id) {
             rollbar.error('No id for app.delete')
         } else if (id) {
