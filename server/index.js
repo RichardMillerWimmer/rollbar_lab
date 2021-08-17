@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/api/friends', controller.getFriends)
+app.delete('/api/friends/:id', controller.removeFriend)
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`)
