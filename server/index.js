@@ -13,6 +13,7 @@ const controller = require('./controller');
 const app = express();
 
 app.use(express.json());
+app.use('/static', express.static(path.join(__dirname, '../client')));
 
 const port = process.env.PORT || 4141;
 
