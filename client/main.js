@@ -1,12 +1,14 @@
 const friendsBtn = document.getElementById('friendsBtn');
 
-const friendConteiner = document.getElementById('friendContainer');
+const friendsConteiner = document.getElementById('friendContainer');
 
 function getFriends() {
+    console.log('getFriend Main.js')
+    friendsConteiner.innerHTML = '';
     axios.get('/api/friends')
     .then(res => {
         let friends = res.data
-        friends.forEach((element) => {
+        friends.forEach(element => {
             friendConteiner.innerHTML += `<p name=${element}>${element}</p>`
 
             document.querySelectorAll('p').forEach(element => {
@@ -21,4 +23,6 @@ function getFriends() {
             })
         });
     })
-}
+};
+
+friendsBtn.addEventListener('click', getFriends)
