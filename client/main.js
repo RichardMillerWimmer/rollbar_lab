@@ -1,6 +1,6 @@
 const friendsBtn = document.getElementById('friendsBtn');
 
-const friendsConteiner = document.getElementById('friendContainer');
+const friendsConteiner = document.getElementById('friendsContainer');
 
 function getFriends() {
     console.log('getFriend Main.js')

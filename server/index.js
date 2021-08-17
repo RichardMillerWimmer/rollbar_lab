@@ -1,6 +1,13 @@
 const express = require('express');
 const path = require('path');
 
+const Rollbar = require('rollbar');
+const rollbar = new Rollbar({
+    accessToken: '',
+    captureUncaught: true,
+    captureUnhandledRejections: true,
+})
+
 const controller = require('./controller');
 
 const app = express();
@@ -10,7 +17,7 @@ app.use(express.json());
 const port = process.env.PORT || 4141;
 
 app.get('/', (req, res) => {
-
+    rollbar.log('App.get homepage hit')
     res.sendFile(path.join(__dirname, '../client/index.html'))
 });
 
