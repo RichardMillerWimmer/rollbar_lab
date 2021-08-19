@@ -9,11 +9,11 @@ module.exports = {
     },
     removeFriend: (req, res) => {
         let { id } = req.params
-        let id = ''
+        id = ''
         // console.log(id)
 
         if(!id) {
-            rollbar.error('No id for app.delete')
+            // rollbar.error('No id for app.delete')
         } else if (id) {
             friends = friends.filter(element => {
                 return element !== id
