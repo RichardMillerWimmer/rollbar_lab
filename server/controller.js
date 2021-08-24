@@ -9,8 +9,8 @@ module.exports = {
     },
     removeFriend: (req, res) => {
         let { id } = req.params
-        id = ''
-        // console.log(id)
+        // id = ''
+        console.log(id)
 
         if(!id) {
             // rollbar.error('No id for app.delete')

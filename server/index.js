@@ -12,7 +12,7 @@ const rollbar = new Rollbar({
   });
 
   const app = express();
-  
+  const node_dependencies = ['axios'];
   const port = process.env.PORT || 4141;
   
   // rollbar.log("Hello world!");
@@ -21,7 +21,10 @@ const rollbar = new Rollbar({
   app.use(cors());
   
   app.use('/static', express.static(path.join(__dirname, '../client')));
-  // app.use(express.static('client'));
+//   app.use('/scripts', express.static(path.join(__dirname + '../node_modules/axios/dist/')));
+  app.get('/axios.min.js', function(req, res) {
+    res.sendFile(path.join(__dirname, '../node_modules/axios/dist/axios.min.js'));
+});
   
 app.get('/', (req, res) => {
     rollbar.log('App.get homepage')
@@ -38,7 +41,7 @@ app.get('/friends', (req, res) => {
 });
 
 app.get('/api/friends', controller.getFriends);
-app.delete('/api/friends', controller.removeFriend);
+app.delete('/api/friends/:id', controller.removeFriend);
 
 // let friends = ['Matt', 'Brady', 'Eric', 'Stuart'];
 
